@@ -1,5 +1,6 @@
 package com.compup;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -13,6 +14,8 @@ public class MainGUI
 	//Create the default containers
 	private JFrame mainFrame = new JFrame("Main GUI Panel");
 	private JPanel contentPanel = new JPanel();
+	private JPanel topLabelPanel = new JPanel();
+	private JPanel bottomButtonPanel = new JPanel();
 	//Create a button object
 	private JButton button1 = new JButton();		
 	//Create a new label object
@@ -28,15 +31,19 @@ public class MainGUI
 		contentPanel.setPreferredSize(new Dimension(200, 200));
 			
 		mainFrame.setContentPane(contentPanel);
-			
-		mainFrame.pack();
+
 			
 		mainFrame.setVisible(true);
 
-		//Add a button to the content pane
-		contentPanel.add(button1);
-		//Add a label to the content pane
-		contentPanel.add(label1);
+		contentPanel.add(topLabelPanel);
+		contentPanel.add(bottomButtonPanel);
+		//Add a label to the Label panel
+		topLabelPanel.add(label1);
+		//Add a button to the Button panel
+		bottomButtonPanel.add(button1);
+		
+		mainFrame.pack();
+		
 	}
 	
 	//TODO: Everything! Next up: add more JPanels for organization for
