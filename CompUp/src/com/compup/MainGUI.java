@@ -38,7 +38,7 @@ public class MainGUI
 		contentPanel.setBackground(Color.lightGray);
 		contentPanel.setPreferredSize(new Dimension(600, 200));
 		
-		//Set default close operation for mainFrame
+		//Set options for the main frame
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		mainFrame.setContentPane(contentPanel);
 		mainFrame.setVisible(true);
