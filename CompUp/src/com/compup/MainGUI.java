@@ -8,9 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +23,7 @@ import javax.swing.JTextField;
 public class MainGUI 
 {
 	//Create the default containers
-	private JFrame mainFrame = new JFrame("CompUp - Keep Your Computer Awake!");
+	private JFrame mainFrame = new JFrame("==CompUp==Keep Your Computer Awake!");
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	private JPanel northPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
@@ -34,8 +32,9 @@ public class MainGUI
 	
 	//Create a new header label
 	private JLabel headerLabel = new JLabel("<html><div style='text-align: center;'> " 
-											+ "Please choose which key to simulate action<br>"
-											+ " to keep your machine awake.<br><br></div></html>");
+											+ "Please choose which key to simulate a key press<br>"
+											+ "to keep your machine awake.<br>"
+											+ "'a' is for testing and is probably not useful.<br></div></html>");
 	//Create a the option buttons
 	private JButton f15Button = new JButton("F15");
 	private JButton f14Button = new JButton("F14");
@@ -62,7 +61,6 @@ public class MainGUI
 	public MainGUI ()
 	{
 		//Set properties of the content panel
-		contentPanel.setBackground(Color.lightGray);
 		contentPanel.setPreferredSize(new Dimension(400, 200));
 		
 		//Set options for the main frame
@@ -73,6 +71,11 @@ public class MainGUI
 		
 		//Configure components
 		textField.setColumns(20);
+		
+		northPanel.setBackground(new Color(119, 172, 202));
+		westPanel.setBackground(new Color(183, 205, 215));
+		southPanel.setBackground(new Color(239, 245, 249));
+		centerPanel.setBackground(new Color(215, 231, 240));
 		
 		//Add components to sub panels
 		northPanel.add(headerLabel, BorderLayout.NORTH);
@@ -104,14 +107,15 @@ public class MainGUI
 			public void run()
 			{
 				GUIBot guiBot = new GUIBot();
-				textField.setText(textField.getText() + chosenKey);
+				textField.setText("This text field is currently only for testing.");
+				//textField.setText(textField.getText() + chosenKey);
 				guiBot.keyPress(chosenKey);
 			}
 		};
 		
 		//Create the scheduled service that will check for a key press
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-		executor.scheduleAtFixedRate(runnable, 0, 1, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(runnable, 0, 59, TimeUnit.SECONDS);
 	}
 	
 	/**
@@ -140,9 +144,6 @@ public class MainGUI
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				JDialog test = new JDialog(mainFrame, "test!");
-				test.setLocationRelativeTo(mainFrame);
-				test.setVisible(true);
 				chosenKey = "shift";
 			}
 		});

@@ -8,6 +8,9 @@ public class GUIBot
 {
 	Robot bot;
 	
+	/**
+	 * the constructor for GUIbot creates a new Robot
+	 */
 	public GUIBot()
 	{
 		try
@@ -20,6 +23,10 @@ public class GUIBot
 		}
 	}
 	
+	/**
+	 * checks for the type of simulated key press needed by the user
+	 * @param inputKey the name of the key chosen 
+	 */
 	public void keyPress (String inputKey)
 	{
 		if (inputKey.equals("f15"))
