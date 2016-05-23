@@ -5,12 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MainGUI 
 {
@@ -18,11 +23,13 @@ public class MainGUI
 	private JFrame mainFrame = new JFrame("CompUp-Keep Your Computer Awake!");
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	private JPanel northPanel = new JPanel();
+	private JPanel southPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
 	
 	//Create a new header label
-	private JLabel headerLabel = new JLabel("<html><div style='text-align: center;'> Please choose which key to simulate action<br>"
+	private JLabel headerLabel = new JLabel("<html><div style='text-align: center;'> " 
+											+ "Please choose which key to simulate action<br>"
 											+ " to keep your machine awake.<br><br></div></html>");
 	//Create a the option buttons
 	private JButton f15Button = new JButton("F15");
@@ -31,8 +38,16 @@ public class MainGUI
 
 	//Create a new label object
 	private JLabel westLabelText = new JLabel("<html>Pick a key on the right.<br>"
-			+ "The default is F15.</div></html>");
+			+ "The default is F15.</html>");
 	
+	//Create a new text field
+	private JTextField textField = new JTextField();
+	
+	//Current chosen key
+	private String chosenKey = "f15";
+	
+	//Did the key change
+	private boolean keyChanged = false;
 	/**
 	 * the constructor for the MainGUI. Sets colors, visibility, and adds
 	 * components
@@ -49,25 +64,44 @@ public class MainGUI
 		mainFrame.setVisible(true);
 		mainFrame.setResizable(false);
 		
+		//Configure components
+		textField.setColumns(20);
 		
+		//Add components to sub panels
+		northPanel.add(headerLabel, BorderLayout.NORTH);
+		westPanel.add(westLabelText);
+		southPanel.add(textField);
+		centerPanel.add(f15Button);
+		centerPanel.add(f14Button);
+		centerPanel.add(shift);
+		
+		//Add sub panels to content panel
+		contentPanel.add(northPanel, BorderLayout.NORTH);
+		contentPanel.add(westPanel, BorderLayout.WEST);
+		contentPanel.add(southPanel, BorderLayout.SOUTH);
+		contentPanel.add(centerPanel, BorderLayout.CENTER);
+		
+		mainFrame.pack();
+	}
+	
+	public void initializeListeners()
+	{
 		//Create action listeners for the buttons
 		f15Button.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{
-						JDialog test = new JDialog(mainFrame, "test!");
-						test.setLocationRelativeTo(mainFrame);
-						test.setVisible(true);
-					}
-				});
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				chosenKey = "f15";
+				startTimer(chosenKey);
+			}
+		});
 		
 		f14Button.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				JDialog test = new JDialog(mainFrame, "test!");
-				test.setLocationRelativeTo(mainFrame);
-				test.setVisible(true);
+				chosenKey = "f14";
+				startTimer(chosenKey);
 			}
 		});
 		
@@ -78,29 +112,28 @@ public class MainGUI
 				JDialog test = new JDialog(mainFrame, "test!");
 				test.setLocationRelativeTo(mainFrame);
 				test.setVisible(true);
+				chosenKey = "shift";
+				startTimer(chosenKey);
 			}
 		});
-		
-		
-		
-		//Add components to sub panels
-		northPanel.add(headerLabel, BorderLayout.NORTH);
-		westPanel.add(westLabelText);
-		centerPanel.add(f15Button);
-		centerPanel.add(f14Button);
-		centerPanel.add(shift);
-		
-		//Add sub panels to content panel
-		contentPanel.add(northPanel, BorderLayout.NORTH);
-		contentPanel.add(westPanel, BorderLayout.WEST);
-		contentPanel.add(centerPanel, BorderLayout.CENTER);
-		
-		mainFrame.pack();
-		
+
+	}
+	
+	public void startTimer(String keyChoice)
+	{
+		Runnable runnable = new Runnable()
+		{
+			public void run()
+			{
+				textField.setText(textField.getText() + keyChoice);
+			}
+		};
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+		executor.scheduleAtFixedRate(runnable, 0, 1, TimeUnit.SECONDS);
+
 	}
 
-	//TODO: Everything! Next up: add more JPanels for organization for
-	//both the buttons and labels in the GUI
+	//TODO: Fix timing; 
 
 
 }
