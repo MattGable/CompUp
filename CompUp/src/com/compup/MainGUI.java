@@ -11,22 +11,23 @@ import javax.swing.JPanel;
 public class MainGUI 
 {
 	//Create the default containers
-	private JFrame mainFrame = new JFrame("Main GUI Panel");
+	private JFrame mainFrame = new JFrame("CompUp-Keep Your Computer Awake!");
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	private JPanel northPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
 	
 	//Create a new header label
-	private JLabel headerLabel = new JLabel("Please choose which key to simulate action \n"
-											+ "to keep your machine awake.");
+	private JLabel headerLabel = new JLabel("<html><div style='text-align: center;'> Please choose which key to simulate action<br>"
+											+ " to keep your machine awake.<br><br></div></html>");
 	//Create a the option buttons
 	private JButton f15Button = new JButton("F15");
 	private JButton f14Button = new JButton("F14");
 	private JButton shift = new JButton("Shift");
 	
 	//Create a new label object
-	private JLabel label1 = new JLabel("Main Label!");
+	private JLabel westLabelText = new JLabel("<html>Pick a key on the right.<br>"
+			+ "The default is F15.</div></html>");
 	
 	/**
 	 * the constructor for the MainGUI. Sets colors, visibility, and adds
@@ -36,17 +37,18 @@ public class MainGUI
 	{
 		//Set properties of the content panel
 		contentPanel.setBackground(Color.lightGray);
-		contentPanel.setPreferredSize(new Dimension(600, 200));
+		contentPanel.setPreferredSize(new Dimension(400, 200));
 		
 		//Set options for the main frame
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		mainFrame.setContentPane(contentPanel);
 		mainFrame.setVisible(true);
+		mainFrame.setResizable(false);
 		
 		
 		//Add components to sub panels
 		northPanel.add(headerLabel, BorderLayout.NORTH);
-		westPanel.add(label1);
+		westPanel.add(westLabelText);
 		centerPanel.add(f15Button);
 		centerPanel.add(f14Button);
 		centerPanel.add(shift);
