@@ -3,7 +3,11 @@ package com.compup;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,7 +28,7 @@ public class MainGUI
 	private JButton f15Button = new JButton("F15");
 	private JButton f14Button = new JButton("F14");
 	private JButton shift = new JButton("Shift");
-	
+
 	//Create a new label object
 	private JLabel westLabelText = new JLabel("<html>Pick a key on the right.<br>"
 			+ "The default is F15.</div></html>");
@@ -44,6 +48,39 @@ public class MainGUI
 		mainFrame.setContentPane(contentPanel);
 		mainFrame.setVisible(true);
 		mainFrame.setResizable(false);
+		
+		
+		//Create action listeners for the buttons
+		f15Button.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						JDialog test = new JDialog(mainFrame, "test!");
+						test.setLocationRelativeTo(mainFrame);
+						test.setVisible(true);
+					}
+				});
+		
+		f14Button.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JDialog test = new JDialog(mainFrame, "test!");
+				test.setLocationRelativeTo(mainFrame);
+				test.setVisible(true);
+			}
+		});
+		
+		shift.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JDialog test = new JDialog(mainFrame, "test!");
+				test.setLocationRelativeTo(mainFrame);
+				test.setVisible(true);
+			}
+		});
+		
 		
 		
 		//Add components to sub panels
