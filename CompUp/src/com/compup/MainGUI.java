@@ -17,10 +17,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * MainGUI is the base class that contains the GUI components and most of the 
+ * logic for the application.
+ * @author Matt
+ * @version 0.1
+ */
 public class MainGUI 
 {
 	//Create the default containers
-	private JFrame mainFrame = new JFrame("CompUp-Keep Your Computer Awake!");
+	private JFrame mainFrame = new JFrame("CompUp - Keep Your Computer Awake!");
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	private JPanel northPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
@@ -46,13 +52,14 @@ public class MainGUI
 	//Current chosen key
 	private String chosenKey = "f15";
 	
-	//Did the key change
-	private boolean keyChanged = false;
+
+	
+	
 	/**
 	 * the constructor for the MainGUI. Sets colors, visibility, and adds
-	 * components
+	 * components.
 	 */
-	public MainGUI()
+	public MainGUI ()
 	{
 		//Set properties of the content panel
 		contentPanel.setBackground(Color.lightGray);
@@ -84,7 +91,30 @@ public class MainGUI
 		mainFrame.pack();
 	}
 	
-	public void initializeListeners()
+	/**
+	 * contains the definition of runnable code and schedules the 
+	 * simulated key presses that keep the computer awake.
+	 */
+	public void startServices ()
+	{
+		//Create the runnable code for the scheduled task
+		Runnable runnable = new Runnable()
+		{
+			public void run()
+			{
+				textField.setText(textField.getText() + chosenKey);
+			}
+		};
+		
+		//Create the scheduled service that will check for a key press
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+		executor.scheduleAtFixedRate(runnable, 0, 1, TimeUnit.SECONDS);
+	}
+	
+	/**
+	 * adds the listeners for the buttons in the program.
+	 */
+	public void initializeListeners ()
 	{
 		//Create action listeners for the buttons
 		f15Button.addActionListener(new ActionListener()
@@ -92,7 +122,6 @@ public class MainGUI
 			public void actionPerformed(ActionEvent e)
 			{
 				chosenKey = "f15";
-				startTimer(chosenKey);
 			}
 		});
 		
@@ -101,7 +130,6 @@ public class MainGUI
 			public void actionPerformed(ActionEvent e)
 			{
 				chosenKey = "f14";
-				startTimer(chosenKey);
 			}
 		});
 		
@@ -113,27 +141,7 @@ public class MainGUI
 				test.setLocationRelativeTo(mainFrame);
 				test.setVisible(true);
 				chosenKey = "shift";
-				startTimer(chosenKey);
 			}
 		});
-
 	}
-	
-	public void startTimer(String keyChoice)
-	{
-		Runnable runnable = new Runnable()
-		{
-			public void run()
-			{
-				textField.setText(textField.getText() + keyChoice);
-			}
-		};
-		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-		executor.scheduleAtFixedRate(runnable, 0, 1, TimeUnit.SECONDS);
-
-	}
-
-	//TODO: Fix timing; 
-
-
 }
