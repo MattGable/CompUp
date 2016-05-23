@@ -40,6 +40,7 @@ public class MainGUI
 	private JButton f15Button = new JButton("F15");
 	private JButton f14Button = new JButton("F14");
 	private JButton shift = new JButton("Shift");
+	private JButton a = new JButton("a");
 
 	//Create a new label object
 	private JLabel westLabelText = new JLabel("<html>Pick a key on the right.<br>"
@@ -80,6 +81,7 @@ public class MainGUI
 		centerPanel.add(f15Button);
 		centerPanel.add(f14Button);
 		centerPanel.add(shift);
+		centerPanel.add(a);
 		
 		//Add sub panels to content panel
 		contentPanel.add(northPanel, BorderLayout.NORTH);
@@ -101,7 +103,9 @@ public class MainGUI
 		{
 			public void run()
 			{
+				GUIBot guiBot = new GUIBot();
 				textField.setText(textField.getText() + chosenKey);
+				guiBot.keyPress(chosenKey);
 			}
 		};
 		
@@ -140,6 +144,14 @@ public class MainGUI
 				test.setLocationRelativeTo(mainFrame);
 				test.setVisible(true);
 				chosenKey = "shift";
+			}
+		});
+		
+		a.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				chosenKey = "a";
 			}
 		});
 	}
