@@ -31,10 +31,10 @@ public class MainGUI
 	private JPanel centerPanel = new JPanel();
 	
 	//Create a new header label
-	private JLabel headerLabel = new JLabel("<html><div style='text-align: center;'> " 
-											+ "Please choose which key to simulate a key press<br>"
-											+ "to keep your machine awake.<br>"
-											+ "'a' is for testing and is probably not useful.<br></div></html>");
+	private JLabel headerLabel = new JLabel("<html><div style='text-align: center;'>" 
+											+ "Please choose a key to be virtually pressed every<br>"
+											+ "59 seconds to keep your machine awake.<br>"
+											+ "NOTE: 'a' is for testing and is probably not useful.<br></div></html>");
 	//Create a the option buttons
 	private JButton f15Button = new JButton("F15");
 	private JButton f14Button = new JButton("F14");
