@@ -61,7 +61,7 @@ public class MainGUI
 		mainFrame.pack();
 		
 	}
-	
+
 	//TODO: Everything! Next up: add more JPanels for organization for
 	//both the buttons and labels in the GUI
 
