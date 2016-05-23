@@ -3,8 +3,6 @@ package com.compup;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,11 +16,15 @@ public class MainGUI
 	private JPanel northPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
+	
 	//Create a new header label
 	private JLabel headerLabel = new JLabel("Please choose which key to simulate action \n"
 											+ "to keep your machine awake.");
-	//Create a button object
-	private JButton button1 = new JButton("Button!");		
+	//Create a the option buttons
+	private JButton f15Button = new JButton("F15");
+	private JButton f14Button = new JButton("F14");
+	private JButton shift = new JButton("Shift");
+	
 	//Create a new label object
 	private JLabel label1 = new JLabel("Main Label!");
 	
@@ -32,22 +34,25 @@ public class MainGUI
 	 */
 	public MainGUI()
 	{
+		//Set properties of the content panel
 		contentPanel.setBackground(Color.lightGray);
 		contentPanel.setPreferredSize(new Dimension(600, 200));
-			
+		
+		//Set default close operation for mainFrame
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		mainFrame.setContentPane(contentPanel);
-			
 		mainFrame.setVisible(true);
 		
-		contentPanel.add(northPanel, BorderLayout.NORTH);
-
-		//Add label to header
-		northPanel.add(headerLabel, BorderLayout.NORTH);
-		//Add a label to the Label panel
-		westPanel.add(label1);
-		//Add a button to the Button panel
-		centerPanel.add(button1);
 		
+		//Add components to sub panels
+		northPanel.add(headerLabel, BorderLayout.NORTH);
+		westPanel.add(label1);
+		centerPanel.add(f15Button);
+		centerPanel.add(f14Button);
+		centerPanel.add(shift);
+		
+		//Add sub panels to content panel
+		contentPanel.add(northPanel, BorderLayout.NORTH);
 		contentPanel.add(westPanel, BorderLayout.WEST);
 		contentPanel.add(centerPanel, BorderLayout.CENTER);
 		
