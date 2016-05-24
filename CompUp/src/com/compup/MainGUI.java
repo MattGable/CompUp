@@ -113,7 +113,7 @@ public class MainGUI
 			}
 		};
 		
-		//Create the scheduled service that will check for a key press
+		//Create the scheduled service that will simulate a key press
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 		executor.scheduleAtFixedRate(runnable, 0, 59, TimeUnit.SECONDS);
 	}
